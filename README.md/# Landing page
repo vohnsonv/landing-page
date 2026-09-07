@@ -1,0 +1,14 @@
+# Landing page
+Esta é a Landing Page desenvolvida como parte da entrega do projeto
+
+## Tecnologias Utilizadas
+- HTML5 / CSS3
+- Git e GitHub
+- Vercel (Deploy)
+
+## Link da aplicação
+Acesse a aplicação publicada: https://landing-page-three-lemon-99.vercel.app/
+## Como rodar o projeto localmente
+1. Clone o repositório:
+   '''bash
+   git clone [https://github.com/jairlleyalander/landing-page.git](https://github.com/jairlleyalander/landing-page.git)
