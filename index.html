@@ -1,30 +1,246 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- Configuração de codificação de caracteres e responsividade -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jaírlley Alander — Desenvolvedor Web</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- Importação da biblioteca de ícones Lucide via CDN para estilização moderna -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Estilos CSS unificados diretamente no arquivo HTML -->
+    <style>
+        /* Configuração geral do corpo da página utilizando Flexbox para centralização */
+        body {
+            display: flex;
+            flex-direction: column; /* Organiza os elementos verticalmente em coluna */
+            align-items: center; /* Centraliza horizontalmente */
+            justify-content: flex-start; /* Alinha ao topo */
+            text-align: center; /* Centraliza o texto */
+            /* Fundo com gradiente moderno para um visual mais atraente */
+            background: linear-gradient(135deg, #022222 0%, #011616 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte moderna e limpa */
+            color: #c5d3e8; /* Cor clara para melhor leitura */
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.7; /* Aumenta o espaçamento entre linhas para legibilidade */
+            min-height: 100vh;
+        }
+
+        /* Estilização da foto de perfil */
+        .perfil-img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
+            border-radius: 50%; /* Transforma a imagem em um círculo perfeito */
+            border: 4px solid #00d2ff; /* Borda brilhante e moderna */
+            box-shadow: 0 8px 20px rgba(0, 210, 255, 0.3); /* Sombra elegante ao redor da foto */
+            margin-bottom: 24px;
+            transition: transform 0.3s ease; /* Transição suave para animações */
+        }
+
+        /* Efeito de zoom sutil ao passar o mouse na foto */
+        .perfil-img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Estilo base para todos os botões */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px; /* Espaço entre o ícone e o texto */
+            padding: 12px 24px;
+            margin: 8px;
+            border-radius: 8px; /* Bordas arredondadas modernas */
+            text-decoration: none;
+            font-weight: 650;
+            transition: all 0.3s ease; /* Transição suave para cor, fundo e sombra */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Botão principal (destaque) */
+        .btn-primary {
+            background: linear-gradient(135deg, #0066cc 0%, #00d2ff 100%); /* Gradiente vibrante */
+            color: white;
+        }
+
+        /* Efeito de hover no botão principal */
+        .btn-primary:hover {
+            transform: translateY(-2px); /* Efeito de elevação */
+            box-shadow: 0 6px 15px rgba(0, 210, 255, 0.4);
+        }
+
+        /* Botão secundário (contorno) */
+        .btn-secondary {
+            background-color: transparent;
+            color: #00d2ff;
+            border: 2px solid #00d2ff;
+        }
+
+        /* Efeito de hover no botão secundário */
+        .btn-secondary:hover {
+            background-color: #00d2ff;
+            color: #022222;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 210, 255, 0.3);
+        }
+
+        /* Container padrão para cada seção da página */
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 30px auto;
+            padding: 30px;
+            background: rgba(3, 49, 49, 0.5); /* Efeito translúcido (Glassmorphism) */
+            backdrop-filter: blur(10px); /* Desfoque do fundo atrás do container */
+            border: 1px solid rgba(5, 85, 85, 0.6);
+            border-radius: 12px; /* Cantos arredondados */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Sombra suave */
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        /* Estilização dos títulos de cada seção com Flexbox para alinhar ícones e texto */
+        .container h2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* Espaço entre o ícone e o título */
+            color: #00d2ff;
+            border-bottom: 2px solid rgba(0, 210, 255, 0.3);
+            padding-bottom: 12px;
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+
+        /* Lista de tecnologias estudadas */
+        .tech-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap; /* Permite que os itens quebrem linha em telas menores */
+        }
+
+        /* Itens individuais da lista de tecnologias (Badges com ícones) */
+        .tech-list li {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #033636 0%, #044f4f 100%);
+            color: #00d2ff;
+            padding: 12px 24px;
+            border-radius: 30px; /* Formato de pílula / badge */
+            font-weight: bold;
+            border: 1px solid #00d2ff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        /* Efeito ao passar o mouse nas tags de tecnologia */
+        .tech-list li:hover {
+            transform: translateY(-3px);
+            background: #00d2ff;
+            color: #022222;
+        }
+
+        /* Cartão de projeto */
+        .projeto-card {
+            background: rgba(2, 34, 34, 0.7);
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            padding: 24px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Efeito de hover no cartão de projeto */
+        .projeto-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 210, 255, 0.2);
+        }
+
+        /* Título dentro do cartão de projeto */
+        .projeto-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffffff;
+            margin-top: 0;
+            font-size: 1.4rem;
+        }
+
+        /* Container dos links de contato */
+        .contato-links {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Links individuais de contato estilizados como botões com ícones */
+        .contato-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0066cc 0%, #00d2ff 100%);
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Efeito de hover nos links de contato */
+        .contato-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 210, 255, 0.4);
+        }
+    </style>
 </head>
 <body>
 
-    <!-- 1. SEÇÃO HERO / APRESENTAÇÃO -->
+    <!-- Seção de Cabeçalho / Apresentação (Hero Section) -->
     <header class="hero">
-        <!-- Mude o nome do arquivo da sua foto para 'foto.jpg' e coloque na mesma pasta -->
-        <img src="perfil.jpeg" alt="Foto de Jaírlley Alander" class="perfil-img"
+        <!-- Imagem de perfil com borda arredondada e ajuste de proporção -->
+        <img src="perfil.jpeg" alt="Foto de Jaírlley Alander" class="perfil-img">
+        
+        <!-- Título principal da página -->
         <h1>Olá, eu sou o Jaírlley Alander, tudo bem?</h1>
+        
+        <!-- Subtítulo indicando a profissão/foco -->
         <h2>Futuro Desenvolvedor Web</h2>
+        
+        <!-- Breve biografia ou introdução pessoal -->
         <p class="hero-texto">Operador de serviços de campo em telecomunicações migrando para a tecnologia. Movido pela paixão de aprender coisas novas!</p>
         
+        <!-- Container para os botões de ação (Call to Action - CTA) com ícones -->
         <div class="hero-botoes">
-            <a href="#projetos" class="btn btn-primary">Conheça meu trabalho</a>
-            <a href="#contato" class="btn btn-secondary">Entrar em contato</a>
+            <a href="#projetos" class="btn btn-primary">
+                <!-- Ícone de seta para baixo indicando navegação -->
+                <i data-lucide="arrow-down"></i> Conheça meu trabalho
+            </a>
+            <a href="#contato" class="btn btn-secondary">
+                <!-- Ícone de mensagem/envio -->
+                <i data-lucide="send"></i> Entrar em contato
+            </a>
         </div>
     </header>
 
-    <!-- 2. SEÇÃO SOBRE MIM -->
+    <!-- Seção Sobre Mim -->
     <section id="sobre" class="container">
-        <h2>Sobre Mim</h2>
+        <h2>
+            <!-- Ícone de usuário para a seção Sobre Mim -->
+            <i data-lucide="user"></i> Sobre Mim
+        </h2>
         <p>
             Trabalho atualmente na área de telecomunicações como operador de serviços de campo. Por sempre gostar de aprender coisas novas, 
             descobri uma nova paixão na programação. Sei que é um longo caminho pela frente, mas o primeiro passo já foi dado com muita dedicação.
@@ -34,35 +250,67 @@
         </p>
     </section>
 
-    <!-- 3. SEÇÃO TECNOLOGIAS -->
+    <!-- Seção de Tecnologias -->
     <section id="tecnologias" class="container">
-        <h2>Tecnologias que estou estudando</h2>
+        <h2>
+            <!-- Ícone de processador/tecnologia -->
+            <i data-lucide="cpu"></i> Tecnologias que estou estudando
+        </h2>
+        <!-- Lista não ordenada estilizada como tags/cards de habilidades com ícones -->
         <ul class="tech-list">
-            <li>HTML5</li>
-            <li>CSS3</li>
-            <li>Git e GitHub</li>
+            <li>
+                <i data-lucide="file-code"></i> HTML5
+            </li>
+            <li>
+                <i data-lucide="palette"></i> CSS3
+            </li>
+            <li>
+                <i data-lucide="git-branch"></i> Git e GitHub
+            </li>
         </ul>
     </section>
 
-    <!-- 4. SEÇÃO PROJETOS -->
+    <!-- Seção de Projetos -->
     <section id="projetos" class="container">
-        <h2>Meus Projetos</h2>
+        <h2>
+            <!-- Ícone de pasta/código para projetos -->
+            <i data-lucide="folder-git-2"></i> Meus Projetos
+        </h2>
+        <!-- Cartão de projeto individual -->
         <div class="projeto-card">
-            <h3>Landing Page Pessoal</h3>
+            <h3>
+                <!-- Ícone de código no título do projeto -->
+                <i data-lucide="code"></i> Landing Page Pessoal
+            </h3>
             <p>Meu primeiro projeto desenvolvido durante meus estudos de desenvolvimento web, servindo como minha apresentação oficial na internet.</p>
         </div>
     </section>
 
-    <!-- 5. SEÇÃO CONTATO -->
+    <!-- Seção de Rodapé / Contato -->
     <footer id="contato" class="container">
-        <h2>Contato</h2>
+        <h2>
+            <!-- Ícone de contato/email -->
+            <i data-lucide="mail"></i> Contato
+        </h2>
         <p>Vamos conectar? Você pode me encontrar nos links abaixo:</p>
+        <!-- Links de redes sociais e contato com ícones -->
         <div class="contato-links">
-            <a href="https://github.com" target="_blank">GitHub</a>
-            <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-            <a href="mailto:seu-email@exemplo.com">E-mail</a>
+            <a href="https://github.com" target="_blank">
+                <i data-lucide="github"></i> GitHub
+            </a>
+            <a href="https://linkedin.com" target="_blank">
+                <i data-lucide="linkedin"></i> LinkedIn
+            </a>
+            <a href="mailto:seu-email@exemplo.com">
+                <i data-lucide="mail"></i> E-mail
+            </a>
         </div>
     </footer>
+
+    <!-- Script para renderizar e inicializar os ícones do Lucide -->
+    <script>
+        lucide.createIcons();
+    </script>
 
 </body>
 </html>
